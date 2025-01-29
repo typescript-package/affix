@@ -38,11 +38,25 @@ npm install @typescript-package/affix --save-peer
 
 ```typescript
 import {
+  // Abstract.
   Affix,
+  // Class.
   Prefix,
   Suffix
 } from '@typescript-package/affix';
 ```
+
+### Affix
+
+A class to manage affixes (prefixes or suffixes) that can be applied to strings.
+
+### Prefix
+
+A class to manage prefixes that can be applied to strings.
+
+### Suffix
+
+A class to manage suffixes that can be applied to strings.
 
 ## Contributing
 
