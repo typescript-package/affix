@@ -46,15 +46,15 @@ import {
 } from '@typescript-package/affix';
 ```
 
-### Affix
+### `Affix`
 
 A class to manage affixes (prefixes or suffixes) that can be applied to strings.
 
-### Prefix
+### `Prefix`
 
 A class to manage prefixes that can be applied to strings.
 
-### Suffix
+### `Suffix`
 
 A class to manage suffixes that can be applied to strings.
 
