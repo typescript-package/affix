@@ -1,63 +1,123 @@
-# Affix
+<a href="https://www.typescriptlang.org/">
+  <img
+    src="https://avatars.githubusercontent.com/u/189666396?s=150&u=9d55b1eb4ce258974ead76bf07ccf49ef0eb0ea7&v=4"
+    title="@typescript-package/affix"
+  />
+</a>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+## typescript-package/affix
 
-## Code scaffolding
+<!-- npm badge -->
+[![npm version][typescript-package-npm-badge-svg]][typescript-package-npm-badge]
+[![GitHub issues][typescript-package-badge-issues]][typescript-package-issues]
+[![GitHub license][typescript-package-badge-license]][typescript-package-license]
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+A **lightweight** TypeScript library for the affix - prefix and suffix.
 
-```bash
-ng generate component component-name
-```
+<br>
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Table of contents
 
-```bash
-ng generate --help
-```
+- [Installation](#installation)
+- [Api](#api)
+- [Contributing](#contributing)
+- [Support](#support)
+- [Code of Conduct](#code-of-conduct)
+- [Git](#git)
+  - [Commit](#commit)
+  - [Versioning](#versioning)
+- [License](#license)
 
-## Building
-
-To build the library, run:
-
-```bash
-ng build affix
-```
-
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/affix
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Installation
 
 ```bash
-ng test
+npm install @typescript-package/affix --save-peer
 ```
 
-## Running end-to-end tests
+## Api
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```typescript
+import {
+  Affix,
+  Prefix,
+  Suffix
+} from '@typescript-package/affix';
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Contributing
 
-## Additional Resources
+Your contributions are valued! If you'd like to contribute, please feel free to submit a pull request. Help is always appreciated.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Support
+
+If you find this package useful and would like to support its and general development, you can contribute through one of the following payment methods. Your support helps maintain the packages and continue adding new.
+
+Support via:
+
+- [Stripe](https://donate.stripe.com/dR614hfDZcJE3wAcMM)
+- [Revolut](https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29)
+
+Thanks for your support!
+
+## Code of Conduct
+
+By participating in this project, you agree to follow **[Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/)**.
+
+## GIT
+
+### Commit
+
+- [AngularJS Git Commit Message Conventions][git-commit-angular]
+- [Karma Git Commit Msg][git-commit-karma]
+- [Conventional Commits][git-commit-conventional]
+
+### Versioning
+
+[Semantic Versioning 2.0.0][git-semver]
+
+**Given a version number MAJOR.MINOR.PATCH, increment the:**
+
+- MAJOR version when you make incompatible API changes,
+- MINOR version when you add functionality in a backwards-compatible manner, and
+- PATCH version when you make backwards-compatible bug fixes.
+
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
+**FAQ**
+How should I deal with revisions in the 0.y.z initial development phase?
+
+> The simplest thing to do is start your initial development release at 0.1.0 and then increment the minor version for each subsequent release.
+
+How do I know when to release 1.0.0?
+
+> If your software is being used in production, it should probably already be 1.0.0. If you have a stable API on which users have come to depend, you should be 1.0.0. If you’re worrying a lot about backwards compatibility, you should probably already be 1.0.0.
+
+## License
+
+MIT © angular-package ([license][typescript-package-license])
+
+<!-- This package: typescript-package  -->
+  <!-- GitHub: badges -->
+  [typescript-package-badge-issues]: https://img.shields.io/github/issues/typescript-package/affix
+  [typescript-package-badge-forks]: https://img.shields.io/github/forks/typescript-package/affix
+  [typescript-package-badge-stars]: https://img.shields.io/github/stars/typescript-package/affix
+  [typescript-package-badge-license]: https://img.shields.io/github/license/typescript-package/affix
+  <!-- GitHub: badges links -->
+  [typescript-package-issues]: https://github.com/typescript-package/affix/issues
+  [typescript-package-forks]: https://github.com/typescript-package/affix/network
+  [typescript-package-license]: https://github.com/typescript-package/affix/blob/master/LICENSE
+  [typescript-package-stars]: https://github.com/typescript-package/affix/stargazers
+<!-- This package -->
+
+<!-- Package: typescript-package -->
+  <!-- npm -->
+  [typescript-package-npm-badge-svg]: https://badge.fury.io/js/%40typescript-package%2Faffix.svg
+  [typescript-package-npm-badge]: https://badge.fury.io/js/%40typescript-package%2Faffix
+
+<!-- GIT -->
+[git-semver]: http://semver.org/
+
+<!-- GIT: commit -->
+[git-commit-angular]: https://gist.github.com/stephenparish/9941e89d80e2bc58a153
+[git-commit-karma]: http://karma-runner.github.io/0.10/dev/git-commit-msg.html
+[git-commit-conventional]: https://www.conventionalcommits.org/en/v1.0.0/
