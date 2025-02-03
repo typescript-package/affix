@@ -10,86 +10,86 @@ import { Value } from '@typescript-package/core';
  */
 export abstract class Affix<Value extends string = string> extends Value<Value> {
   /**
-   * @description Defines the affix sanitized by specified filter.
+   * @description Defines the affix sanitized by specified pattern.
    * @public
    * @static
    * @template {string} [Value=string] 
-   * @param {Value} value A value of generic type variable `Value` constrained by the `string` type to be sanitized with the `filter`.
-   * @param {RegExp} [filter=Affix.filter] The filter of `RegExp` to sanitize the `affix`. Defaults to static `Affix.filter`.
-   * @returns {Value} The returned value is an affix of a generic type variable `Value`, optionally sanitized by the `filter`.
+   * @param {Value} value A value of generic type variable `Value` constrained by the `string` type to be sanitized with the `pattern`.
+   * @param {RegExp} [pattern=Affix.pattern] The pattern of `RegExp` to sanitize the `affix`. Defaults to static `Affix.pattern`.
+   * @returns {Value} The returned value is an affix of a generic type variable `Value`, optionally sanitized by the `pattern`.
    */
   public static sanitize<Value extends string = string>(
     value: Value,
-    filter: RegExp = Affix.filter,
+    pattern: RegExp = Affix.pattern,
   ): Value {
-    return value.replace(filter, '') as Value;
+    return value.replace(pattern, '') as Value;
   }
 
   /**
-   * @description The default filter pattern used to sanitize the affix, which removes characters that are not part of the valid characters for the affix.
+   * @description The default pattern pattern used to sanitize the affix, which removes characters that are not part of the valid characters for the affix.
    * @public
    * @static
    * @type {RegExp}
    */
-  public static filter: RegExp = /[^a-zA-Z0-9$_]/g;
+  public static pattern: RegExp = /[^a-zA-Z0-9$_]/g;
 
   /**
-   * @description Returns the privately stored filter of `RegExp` type to sanitize the affix.
+   * @description Returns the privately stored pattern of `RegExp` type to sanitize the affix.
    * @public
    * @readonly
    * @type {RegExp}
    */
-  public get filter(): RegExp {
-    return this.#filter;
+  public get pattern() {
+    return this.#pattern;
   }
 
   /**
-   * @description Privately stored filter of `RegExp` to sanitize the affix.
+   * @description Privately stored pattern of `RegExp` to sanitize the affix.
    * @type {RegExp}
    */
-  #filter = Affix.filter;
+  #pattern = Affix.pattern;
 
   /**
    * Creates an instance of child class.
    * @constructor
    * @param {?Value} [value] An optional initial affix of generic type variable `Value` constrained by `string` type.
-   * @param {?RegExp} [filter] The filter of `RegExp` to sanitize the affix.
+   * @param {?RegExp} [pattern] The pattern of `RegExp` to sanitize the affix.
    */
-  constructor(value?: Value, filter?: RegExp) {
+  constructor(value?: Value, pattern?: RegExp) {
     super(value || '' as Value);
-    filter instanceof RegExp && (this.#filter = filter);
+    pattern instanceof RegExp && (this.#pattern = pattern);
     typeof value !== 'undefined' && this.set(value);
   }
 
   /**
-   * @description Returns the affix, optionally sanitized by the `filter`.
+   * @description Returns the affix, optionally sanitized by the `pattern`.
    * @public
-   * @param {?RegExp} [filter] The filter of `RegExp` to sanitize privately stored affix.
-   * @returns {string} Returns privately stored `#affix` of `string` type optionally sanitized by the `filter`.
+   * @param {?RegExp} [pattern] The pattern of `RegExp` to sanitize privately stored affix.
+   * @returns {string} Returns privately stored `#affix` of `string` type optionally sanitized by the `pattern`.
    */
-  public get(filter?: RegExp) {
-    return Affix.sanitize(this.value, filter);
+  public get(pattern?: RegExp) {
+    return Affix.sanitize(this.value, pattern);
   }
 
   /**
    * @description Sets and stores privately sanitized affix of generic type variable `Value` constrained by `string` type.
    * @private
    * @param {Value} value The `affix` of generic type variable `Value`.
-   * @param {RegExp} [filter=this.#filter] The filter of `RegExp` to sanitize the `affix`. Defaults to privately stored `#filter`.
+   * @param {RegExp} [pattern=this.#pattern] The pattern of `RegExp` to sanitize the `affix`. Defaults to privately stored `#pattern`.
    * @returns {this} The returned value is current instance for method chaining.
    */
-  public set(value: Value, filter: RegExp = this.#filter): this {
-    typeof value === 'string' && (super.setValue(Affix.sanitize(value, filter) as Value));
+  public set(value: Value, pattern: RegExp = this.#pattern): this {
+    typeof value === 'string' && (super.setValue(Affix.sanitize(value, pattern) as Value));
     return this;
   }
 
   /**
-   * @description Sets the filter to sanitize the affix.
+   * @description Sets the pattern to sanitize the affix.
    * @public
-   * @param {RegExp} filter The filter of `RegExp` to sanitize the affix.
+   * @param {RegExp} pattern The pattern of `RegExp` to sanitize the affix.
    */
-  public setFilter(filter: RegExp): this {
-    filter instanceof RegExp && (this.#filter = filter);
+  public setPattern(pattern: RegExp): this {
+    pattern instanceof RegExp && (this.#pattern = pattern);
     return this;
   }
 }

@@ -9,17 +9,17 @@ import { Affix } from "./affix.abstract";
  */
 export class Suffix<Value extends string = string> extends Affix<Value> {
   /**
-   * @description Sanitizes the suffix with a `filter`.
+   * @description Sanitizes the suffix with a `pattern`.
    * @public
    * @param {string} value 
-   * @param {RegExp} [filter=Suffix.filter] 
+   * @param {RegExp} [pattern=Suffix.pattern] 
    * @returns {string} 
    */
   public static override sanitize<Value extends string = string>(
     value: Value,
-    filter: RegExp = Suffix.filter
+    pattern: RegExp = Suffix.pattern
   ): Value {
-    return value.replace(filter, '') as Value;
+    return value.replace(pattern, '') as Value;
   }
 
   /**
@@ -28,5 +28,5 @@ export class Suffix<Value extends string = string> extends Affix<Value> {
    * @static
    * @type {RegExp}
    */
-  public static override filter: RegExp = super.filter;
+  public static override pattern: RegExp = super.pattern;
 }
