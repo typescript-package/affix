@@ -10,6 +10,16 @@ import { Value } from '@typescript-package/core';
  */
 export abstract class Affix<Value extends string = string> extends Value<Value> {
   /**
+   * @description Returns the `string` tag representation of the `Affix` class when used in `Object.prototype.toString.call(instance)`.
+   * @public
+   * @readonly
+   * @type {string}
+   */
+  public override get [Symbol.toStringTag]() {
+    return 'Affix';
+  }
+
+  /**
    * @description Defines the affix sanitized by specified pattern.
    * @public
    * @static
@@ -87,6 +97,7 @@ export abstract class Affix<Value extends string = string> extends Value<Value> 
    * @description Sets the pattern to sanitize the affix.
    * @public
    * @param {RegExp} pattern The pattern of `RegExp` to sanitize the affix.
+   * @returns {this} 
    */
   public setPattern(pattern: RegExp): this {
     pattern instanceof RegExp && (this.#pattern = pattern);
