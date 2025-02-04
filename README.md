@@ -20,6 +20,9 @@ A **lightweight** TypeScript library for the affix - prefix and suffix.
 
 - [Installation](#installation)
 - [Api](#api)
+  - [`Affix`](#affix)
+  - [`Prefix`](#prefix)
+  - [`Suffix`](#suffix)
 - [Contributing](#contributing)
 - [Support](#support)
 - [Code of Conduct](#code-of-conduct)
