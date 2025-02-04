@@ -9,6 +9,16 @@ import { Affix } from "./affix.abstract";
  */
 export class Prefix<Value extends string = string> extends Affix<Value> {
   /**
+   * @description Returns the `string` tag representation of the `Prefix` class when used in `Object.prototype.toString.call(instance)`.
+   * @public
+   * @readonly
+   * @type {string}
+   */
+  public override get [Symbol.toStringTag]() {
+    return 'Prefix';
+  }
+
+  /**
    * @description Sanitizes the prefix with a `pattern`.
    * @public
    * @param {string} value 

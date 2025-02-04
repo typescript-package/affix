@@ -9,6 +9,16 @@ import { Affix } from "./affix.abstract";
  */
 export class Suffix<Value extends string = string> extends Affix<Value> {
   /**
+   * @description Returns the `string` tag representation of the `Suffix` class when used in `Object.prototype.toString.call(instance)`.
+   * @public
+   * @readonly
+   * @type {string}
+   */
+  public override get [Symbol.toStringTag]() {
+    return 'Suffix';
+  }
+
+  /**
    * @description Sanitizes the suffix with a `pattern`.
    * @public
    * @param {string} value 
