@@ -1,12 +1,17 @@
+import { typeOf } from '@typescript-package/core';
 import { Prefix } from '../lib/prefix.class';
 
 const prefix = new Prefix();
 
 console.group(`Prefix`);
+console.log(prefix);
 
 console.debug(`set('_')`, prefix.set('_'));
 console.debug(`get()`, prefix.get());
 console.debug(`value`, prefix.value);
+
+console.log(`typeOf(), `, typeOf(prefix));
+console.log(`[object Suffix], `, Object.prototype.toString.call(prefix));
 
 console.groupEnd();
 
