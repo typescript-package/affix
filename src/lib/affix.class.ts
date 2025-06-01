@@ -4,12 +4,12 @@ import { BasicAffixKind } from "@typedly/affix";
  * @description A base class to manage affixes (prefixes or suffixes) that can be applied to strings.
  * @export
  * @class Affix
- * @template {string} [Value=''] The type of affix constrained by the `string`. Defaults to `string`.
+ * @template {string} [Value=string] The type of affix constrained by the `string`. Defaults to `string`.
  * @template {BasicAffixKind | undefined} [Kind=BasicAffixKind | undefined] 
  * @template {RegExp | string | undefined} [Pattern=RegExp | string | undefined] 
  */
 export class Affix<
-  Value extends string = '',
+  Value extends string = string,
   Kind extends BasicAffixKind | undefined = BasicAffixKind | undefined,
   Pattern extends RegExp | string | undefined = RegExp | string | undefined,
 > {
@@ -27,12 +27,12 @@ export class Affix<
    * @description Defines the affix sanitized by specified pattern.
    * @public
    * @static
-   * @template {string} [Value=''] The type of affix constrained by the `string` type. Defaults to `string`.
+   * @template {string} [Value=string] The type of affix constrained by the `string` type. Defaults to `string`.
    * @param {Value} value A value of generic type variable `Value` constrained by the `string` type to be sanitized with the `pattern`.
    * @param {RegExp | string} [pattern=Affix.pattern] The pattern of `RegExp` to sanitize the `affix`. Defaults to static `Affix.pattern`.
    * @returns {Value} The returned value is an affix of a generic type variable `Value`, optionally sanitized by the `pattern`.
    */
-  public static sanitize<Value extends string = ''>(
+  public static sanitize<Value extends string = string>(
     value: Value,
     pattern: RegExp | string = this.pattern,
   ): Value {
@@ -61,7 +61,7 @@ export class Affix<
    * @description Returns the privately stored pattern of `PatternValue` type to sanitize the affix.
    * @public
    * @readonly
-   * @type {Pattern | undefined}
+   * @type {(Pattern | undefined)}
    */
   public get pattern(): Pattern | undefined {
     return this.#pattern;
@@ -78,16 +78,16 @@ export class Affix<
   }
 
   /**
-   * @description Privately stored kind of `KindValue` to define the type of affix.
-   * @type {?Kind}
+   * @description Privately stored kind of `Kind` to define the type of affix.
+   * @type {Kind | undefined}
    */
-  #kind?: Kind;
+  #kind: Kind | undefined;
 
   /**
-   * @description Privately stored pattern of `PatternValue` to sanitize the affix.
-   * @type {?Pattern}
+   * @description Privately stored pattern of `Pattern` to sanitize the affix.
+   * @type {Pattern | undefined}
    */
-  #pattern?: Pattern;
+  #pattern: Pattern | undefined;
 
   /**
    * @description Privately stored affix of generic type variable `Value` constrained by `string` type.
@@ -96,7 +96,7 @@ export class Affix<
   #value: Value;
 
   /**
-   * Creates an instance of `Affix` child class.
+   * Creates an instance of `Affix`.
    * @constructor
    * @param {Value} value An optional initial affix of generic type variable `Value` constrained by `string` type. Defaults to `Affix.pattern`.
    * @param {{ kind?: Kind, pattern?: Pattern }} [param0={}] 
@@ -123,14 +123,35 @@ export class Affix<
   }
 
   /**
-   * @description Sets and stores privately sanitized affix of generic type variable `Value` constrained by `string` type.
    * @private
    * @param {Value} value The `affix` of generic type variable `Value`.
    * @param {(Pattern | undefined)} [pattern=this.#pattern] The pattern of `RegExp` to sanitize the `affix`. Defaults to privately stored `#pattern`.
+   */
+
+  /**
+   * @description Sets and stores privately sanitized affix of generic type variable `Value` constrained by `string` type.
+   * @public
+   * @param {({ kind?: Kind | undefined, pattern?: Pattern | undefined, value?: Value})} [param0={}] 
+   * @param {Kind} param0.kind The kind of affix constrained by `BasicAffixKind` type.
+   * @param {Pattern} param0.pattern The pattern of `Pattern` to sanitize the affix.
+   * @param {Value} param0.value The value of the affix constrained by `string` type.
    * @returns {this} The returned value is current instance for method chaining.
    */
-  public set(value: Value, pattern: Pattern | undefined = this.#pattern): this {
-    typeof value === 'string' && (this.setValue(Affix.sanitize(value, pattern) as Value));
+  public set({ kind, pattern, value }: { kind?: Kind | undefined, pattern?: Pattern | undefined, value?: Value } = {}): this {
+    typeof value === 'string' && this.setValue(Affix.sanitize(value, pattern) as Value);
+    this.setKind(kind);
+    this.setPattern(pattern);
+    return this;
+  }
+
+  /**
+   * @description Sets the kind of affix.
+   * @public
+   * @param {Kind | undefined} kind The kind of generic type variable `Kind` constrained by `BasicAffixKind` type.
+   * @returns {this} The returned value is current instance for method chaining.
+   */
+  public setKind(kind: Kind | undefined): this {
+    this.#kind = kind;
     return this;
   }
 
@@ -148,11 +169,11 @@ export class Affix<
   /**
    * @description Sets the value of the affix, sanitizing it according to the defined pattern.
    * @public
-   * @param {Value} value 
+   * @param {Value | undefined} value 
    * @returns {this} 
    */
-  public setValue(value: Value): this {
-    this.#value = Affix.sanitize(value, this.#pattern);
+  public setValue(value: Value | undefined): this {
+    this.#value = Affix.sanitize(value ?? '' as Value, this.#pattern);
     return this;
   }
 }
