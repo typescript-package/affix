@@ -4,12 +4,12 @@ import { Affix } from "./affix.abstract";
  * @description A class to manage suffixes that can be applied to strings.
  * @export
  * @class Suffix
- * @template {string} [Value=''] The type of suffix constrained by the `string`.
+ * @template {string} [Value=string] The type of suffix constrained by the `string`.
  * @template {RegExp | string | undefined} [Pattern=RegExp | string | undefined] 
  * @extends {Affix<Value, 'suffix', Pattern>}
  */
 export class Suffix<
-  Value extends string = '',
+  Value extends string = string,
   Pattern extends RegExp | string | undefined = RegExp | string | undefined,
 > extends Affix<Value, 'suffix', Pattern> {
   /**

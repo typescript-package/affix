@@ -4,13 +4,12 @@ import { Affix } from "./affix.abstract";
  * @description A class to manage prefixes that can be applied to strings.
  * @export
  * @class Prefix
- * @typedef {Prefix}
- * @template {string} [Value=''] The type of prefix constrained by the `string`.
+ * @template {string} [Value=string] The type of prefix constrained by the `string`.
  * @template {RegExp | string | undefined} [Pattern=RegExp | string | undefined] The type of prefix constrained by the `string`.
  * @extends {Affix<Value, 'prefix', Pattern>}
  */
 export class Prefix<
-  Value extends string = '',
+  Value extends string = string,
   Pattern extends RegExp | string | undefined = RegExp | string | undefined,
 > extends Affix<Value, 'prefix', Pattern> {
   /**
