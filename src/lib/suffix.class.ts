@@ -1,11 +1,11 @@
 // Class.
-import { Affix } from "./affix.abstract";
+import { Affix } from "./affix.class";
 /**
  * @description A class to manage suffixes that can be applied to strings.
  * @export
  * @class Suffix
  * @template {string} [Value=string] The type of suffix constrained by the `string`.
- * @template {RegExp | string | undefined} [Pattern=RegExp | string | undefined] 
+ * @template {RegExp | string | undefined} [Pattern=RegExp | string | undefined] The type of pattern constrained by the `RegExp` or `string`.
  * @extends {Affix<Value, 'suffix', Pattern>}
  */
 export class Suffix<

@@ -1,3 +1,3 @@
-export { Affix } from './affix.abstract';
+export { Affix } from './affix.class';
 export { Prefix } from './prefix.class';
 export { Suffix } from './suffix.class';
