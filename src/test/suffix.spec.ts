@@ -1,4 +1,3 @@
-import { typeOf } from "@typescript-package/core";
 import { Suffix } from "../lib";
 
 const suffix = new Suffix();
