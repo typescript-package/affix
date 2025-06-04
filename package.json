@@ -9,7 +9,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "peerDependencies": {
-    "@typedly/affix": "^2.3.0"
+    "@typedly/affix": "^3.0.0"
   },
   "scripts": {
     "prepublishOnly": "npm run pkg && npm run clean",
