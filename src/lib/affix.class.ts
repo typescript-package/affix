@@ -26,6 +26,14 @@ export class Affix<
   }
 
   /**
+   * @description The default pattern used to sanitize the affix, which removes characters that are not part of the valid characters for the affix.
+   * @public
+   * @static
+   * @type {RegExp | string}
+   */
+  public static pattern: RegExp | string = /[^a-zA-Z0-9$_]/g;
+
+  /**
    * @description Defines the affix sanitized by specified pattern.
    * @public
    * @static
@@ -40,14 +48,6 @@ export class Affix<
   ): Value {
     return value.replace(pattern, '') as Value;
   }
-
-  /**
-   * @description The default pattern used to sanitize the affix, which removes characters that are not part of the valid characters for the affix.
-   * @public
-   * @static
-   * @type {RegExp | string}
-   */
-  public static pattern: RegExp | string = /[^a-zA-Z0-9$_]/g;
 
   /**
    * @description Returns the privately stored pattern of `PatternValue` type to sanitize the affix.
