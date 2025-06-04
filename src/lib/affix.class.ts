@@ -84,7 +84,7 @@ export class Affix<
   /**
    * @description Returns the affix, optionally sanitized by the `pattern`.
    * @public
-   * @param {(Pattern | undefined)} [pattern=this.#pattern] The pattern of `RegExp` to sanitize privately stored affix.
+   * @param {(Pattern)} [pattern=this.#pattern] The pattern of `RegExp` to sanitize privately stored affix.
    * @returns {Value} Returns privately stored `#affix` of `Value` type optionally sanitized by the `pattern`.
    */
   public get(pattern: Pattern = this.#pattern as Pattern): Value {
