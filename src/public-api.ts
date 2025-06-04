@@ -3,6 +3,9 @@
  */
 
 export {
+  // Abstract.
+  AffixCore,
+  // Class.
   Affix,
   Prefix,
   Suffix,
