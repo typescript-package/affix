@@ -5,7 +5,7 @@ const prefix = new Prefix();
 console.group(`Prefix`);
 console.log(prefix);
 
-console.debug(`set('_')`, prefix.set('_'));
+console.debug(`set('_')`, prefix.set({value: ''}));
 console.debug(`get()`, prefix.get());
 console.debug(`value`, prefix.value);
 
@@ -20,5 +20,5 @@ describe(Prefix.name, () => {
 
   it('is DEFINED', () => expect(namePrefix).toBeDefined());
   it('initially set prefix to $$', () => expect(new Prefix('$$').value).toEqual('$$'));
-  it('set prefix to $$', () => expect(namePrefix.set('$$').value).toEqual('$$'));
+  it('set prefix to $$', () => expect(namePrefix.set({value: '$$'}).value).toEqual('$$'));
 });

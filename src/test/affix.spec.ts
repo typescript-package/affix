@@ -1,19 +1,13 @@
 import { BasicAffixKind } from "@typedly/affix";
 import { Affix } from "../lib";
 
-export class TestAffix<
-  Value extends string = '',
-  KindValue extends BasicAffixKind | undefined = BasicAffixKind,
-  PatternValue extends RegExp | string | undefined = RegExp | string | undefined,
-> extends Affix<Value, KindValue, PatternValue> {}
 
-const testAffix = new TestAffix("testAffixValue", 
-  {
-    kind: 'prefix',
-    pattern: /[^a-zA-Z0-9$_]/g,
-  }
-  // {'min': 3, 'max': 10}
-);
+export const prefix = new Affix("testAffixValue",  {
+  kind: 'prefix' as BasicAffixKind,
+  pattern: /[^a-zA-Z0-9$_]/g,
+});
 
-console.log(testAffix);
-console.log(`[object Affix], `, Object.prototype.toString.call(testAffix).match(/\[object (\w+)]/)?.[1]);
+prefix.setKind('suffix');
+
+console.log(prefix.kind);
+console.log(`[object Affix], `, Object.prototype.toString.call(prefix).match(/\[object (\w+)]/)?.[1]);
