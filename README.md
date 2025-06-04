@@ -12,7 +12,9 @@
 [![GitHub issues][typescript-package-badge-issues]][typescript-package-issues]
 [![GitHub license][typescript-package-badge-license]][typescript-package-license]
 
-A **lightweight** TypeScript library for the affix - prefix and suffix.
+**version**: v3.0.0
+
+A **lightweight** TypeScript library for the affix - prefix, suffix, infix and circumfix.
 
 <br>
 
@@ -20,6 +22,7 @@ A **lightweight** TypeScript library for the affix - prefix and suffix.
 
 - [Installation](#installation)
 - [Api](#api)
+  - [`AffixCore`](#affixcore)
   - [`Affix`](#affix)
   - [`Prefix`](#prefix)
   - [`Suffix`](#suffix)
@@ -33,6 +36,14 @@ A **lightweight** TypeScript library for the affix - prefix and suffix.
 
 ## Installation
 
+### 1. Install peer dependencies
+
+```bash
+npm install @typedly/affix --save-peer
+```
+
+### 2. Install the package
+
 ```bash
 npm install @typescript-package/affix --save-peer
 ```
@@ -42,20 +53,50 @@ npm install @typescript-package/affix --save-peer
 ```typescript
 import {
   // Abstract.
-  Affix,
+  AffixCore,
   // Class.
+  Affix,
   Prefix,
-  Suffix
+  Suffix,
 } from '@typescript-package/affix';
+```
+
+### `AffixCore`
+
+A core `abstract` class to manage affixes with the value and kind that can be applied to strings.
+
+```typescript
+import { AffixCore } from '@typescript-package/affix';
+
+class Prefix extends AffixCore<string, 'prefix'> {
+  constructor(value: string) {
+    super(value, 'prefix');
+  }
+}
 ```
 
 ### `Affix`
 
-A class to manage affixes (prefixes or suffixes) that can be applied to strings.
+A concrete class to manage affixes that can be applied to strings with additional sanitization.
+
+```typescript
+import { Affix } from '@typescript-package/affix';
+
+export const prefix = new Affix("testAffixValue",  {
+  kind: 'prefix' as BasicAffixKind,
+  pattern: /[^a-zA-Z0-9$_]/g,
+});
+```
 
 ### `Prefix`
 
 A class to manage prefixes that can be applied to strings.
+
+```typescript
+import { Prefix } from '@typescript-package/affix';
+
+export const prefix = new Prefix();
+```
 
 ### `Suffix`
 
@@ -73,6 +114,17 @@ Support via:
 
 - [Stripe](https://donate.stripe.com/dR614hfDZcJE3wAcMM)
 - [Revolut](https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29)
+- [GitHub](https://github.com/sponsors/angular-package/sponsorships?sponsor=sciborrudnicki&tier_id=83618)
+- [DonorBox](https://donorbox.org/become-a-sponsor-to-the-angular-package?default_interval=o)
+- [Patreon](https://www.patreon.com/checkout/angularpackage?rid=0&fan_landing=true&view_as=public)
+
+or via Trust Wallet
+
+- [XLM](https://link.trustwallet.com/send?coin=148&address=GAFFFB7H3LG42O6JA63FJDRK4PP4JCNEOPHLGLLFH625X2KFYQ4UYVM4)
+- [USDT (BEP20)](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94&token_id=0x55d398326f99059fF775485246999027B3197955)
+- [ETH](https://link.trustwallet.com/send?coin=60&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
+- [BTC](https://link.trustwallet.com/send?coin=0&address=bc1qnf709336tfl57ta5mfkf4t9fndhx7agxvv9svn)
+- [BNB](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
 
 Thanks for your support!
 
