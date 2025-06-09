@@ -1,7 +1,7 @@
 <a href="https://www.typescriptlang.org/">
   <img
     src="https://avatars.githubusercontent.com/u/189666396?s=150&u=9d55b1eb4ce258974ead76bf07ccf49ef0eb0ea7&v=4"
-    title="@typescript-package/affix"
+    title="@typescript-package - The typescript package enhances the development of typescript-based applications by providing well-structured, reusable, easy-to-use packages."
   />
 </a>
 
@@ -14,7 +14,7 @@
 
 **version**: v3.0.0
 
-A **lightweight** TypeScript library for the affix - prefix, suffix, infix and circumfix.
+A **lightweight** TypeScript library for different kind of affixes.
 
 <br>
 
@@ -24,6 +24,8 @@ A **lightweight** TypeScript library for the affix - prefix, suffix, infix and c
 - [Api](#api)
   - [`AffixCore`](#affixcore)
   - [`Affix`](#affix)
+  - [`Circumfix`](#circumfix)
+  - [`Infix`](#infix)
   - [`Prefix`](#prefix)
   - [`Suffix`](#suffix)
 - [Contributing](#contributing)
@@ -56,6 +58,8 @@ import {
   AffixCore,
   // Class.
   Affix,
+  Circumfix,
+  Infix,
   Prefix,
   Suffix,
 } from '@typescript-package/affix';
@@ -88,6 +92,24 @@ export const prefix = new Affix("testAffixValue",  {
 });
 ```
 
+### `Circumfix`
+
+A class to manage circumfixes that can be applied to strings.
+
+```typescript
+import { Circumfix } from '@typescript-package/affix';
+
+```
+
+### `Infix`
+
+A class to manage infixes that can be applied to strings.
+
+```typescript
+import { Infix } from '@typescript-package/affix';
+
+```
+
 ### `Prefix`
 
 A class to manage prefixes that can be applied to strings.
@@ -101,6 +123,10 @@ export const prefix = new Prefix();
 ### `Suffix`
 
 A class to manage suffixes that can be applied to strings.
+
+```typescript
+import { Suffix } from '@typescript-package/affix';
+```
 
 ## Contributing
 
