@@ -7,6 +7,8 @@ export {
   AffixCore,
   // Class.
   Affix,
+  Circumfix,
+  Infix,
   Prefix,
   Suffix,
 } from './lib';
