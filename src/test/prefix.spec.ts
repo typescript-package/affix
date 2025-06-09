@@ -1,24 +1,40 @@
 import { Prefix } from '../lib/prefix.class';
 
-const prefix = new Prefix();
-
-console.group(`Prefix`);
-console.log(prefix);
-
-console.debug(`set('_')`, prefix.set({value: ''}));
-console.debug(`get()`, prefix.get());
-console.debug(`value`, prefix.value);
-
-console.log(`[object Prefix], `, Object.prototype.toString.call(prefix));
-
-console.groupEnd();
-
 describe(Prefix.name, () => {
-  let namePrefix: Prefix;
+  let prefix = new Prefix('pre', /[^a-zA-Z0-9$_]/g);
 
-  beforeEach(() => namePrefix = new Prefix());
+  beforeEach(() => prefix = new Prefix('pre', /[^a-zA-Z0-9$_]/g));
 
-  it('is DEFINED', () => expect(namePrefix).toBeDefined());
-  it('initially set prefix to $$', () => expect(new Prefix('$$').value).toEqual('$$'));
-  it('set prefix to $$', () => expect(namePrefix.set({value: '$$'}).value).toEqual('$$'));
+  it('is DEFINED', () => expect(prefix).toBeDefined());
+  it('initially set prefix to $$', () => expect(prefix.value).toEqual('pre'));
+  it('set prefix to $$', () => expect(prefix.set({value: 'pre'}).value).toEqual('pre'));
+
+  it('should apply prefix to a string', () => {
+    const result = prefix.prependTo('testString', '-');
+    expect(result).toBe('pre-testString');
+  });
+
+  it('should sanitize the prefix using the pattern', () => {
+    const sanitizedPrefix = new Prefix('pre@#$', /[^a-zA-Z0-9$_]/g);
+    expect(sanitizedPrefix.value).toBe('pre$');
+  });
+
+  it('should have a prependTo method', () => {
+    expect(prefix.prependTo).toBeDefined();
+    expect(typeof prefix.prependTo).toBe('function');
+  });
+
+  it('should return the correct value when prependTo is called', () => {
+    const result = prefix.prependTo('testString', '-');
+    expect(result).toBe('pre-testString');
+  });
+
+  it('should return the correct Symbol.toStringTag', () => {
+    expect(Object.prototype.toString.call(prefix).match(/\[object (\w+)]/)?.[1]).toBe('Prefix');
+  });
+
+  it('should prepend a prefix to a string', () => {
+    const result = Prefix.prepend('testString', 'pre', '-');
+    expect(result).toBe('pre-testString');
+  });
 });

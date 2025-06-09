@@ -13,9 +13,17 @@ export class TestAffix<
   }
 }
 
-const testAffix = new TestAffix('test', 'prefix' as BasicAffixKind);
+describe("AffixCore", () => {
+  it("should create an instance with default values", () => {
+    const affix = new TestAffix("test");
+    expect(affix.value).toBe("test");
+    expect(affix.kind).toBeUndefined();
+  });
 
-testAffix.setKind('suffix' as BasicAffixKind);
+  it("should create an instance with specified kind", () => {
+    const affix = new TestAffix("test", "prefix");
+    expect(affix.value).toBe("test");
+    expect(affix.kind).toBe("prefix");
+  });
 
-console.log(testAffix.kind);
-console.log(`[object Affix], `, Object.prototype.toString.call(testAffix).match(/\[object (\w+)]/)?.[1]);
+});
