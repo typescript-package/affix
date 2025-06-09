@@ -2,14 +2,14 @@
   "name": "@typescript-package/affix",
   "version": "3.0.0",
   "author": "wwwdev.io <dev@wwwdev.io>",
-  "description": "A lightweight TypeScript library for the affix - prefix and suffix.",
+  "description": "A lightweight TypeScript library for different kind of affixes.",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "peerDependencies": {
-    "@typedly/affix": "^3.0.0"
+    "@typedly/affix": "^4.0.0"
   },
   "scripts": {
     "prepublishOnly": "npm run pkg && npm run clean",
@@ -29,7 +29,9 @@
     "Affix",
     "Prefix",
     "Suffix",
-    "Value"
+    "Value",
+    "Circumfix",
+    "Infix"
   ],
   "funding": [
     {
