@@ -6,23 +6,36 @@ import { BasicAffixKind } from "@typedly/affix";
  * @description A concrete class to manage affixes that can be applied to strings with additional sanitization.
  * @export
  * @class Affix
- * @template {string} [Value=string] The type of affix constrained by the `string`. Defaults to `string`.
+ * @template {string | [string, string]} [Value=string | [string, string]] The type of affix constrained by the `string`. Defaults to `string`.
  * @template {BasicAffixKind | undefined} [Kind=BasicAffixKind | undefined] 
  * @template {RegExp | string | undefined} [Pattern=RegExp | string | undefined] 
  */
 export class Affix<
-  Value extends string = string,
+  Value extends string | [string, string] = string | [string, string],
   Kind extends BasicAffixKind | undefined = BasicAffixKind | undefined,
   Pattern extends RegExp | string | undefined = RegExp | string | undefined,
 > extends AffixCore<Value, Kind> {
   /**
-   * @description Returns the `string` tag representation of the `Affix` class when used in `Object.prototype.toString.call(instance)`.
+   * @description Defines the affix sanitized by specified pattern.
    * @public
-   * @readonly
-   * @type {string}
+   * @static
+   * @template {string | [string, string]} [Value=string | [string, string]] The type of affix constrained by the `string` type. Defaults to `string`.
+   * @param {Value} value A value of generic type variable `Value` constrained by the `string` type to be sanitized with the `pattern`.
+   * @param {RegExp | string} [pattern=Affix.pattern] The pattern of `RegExp` to sanitize the `affix`. Defaults to static `Affix.pattern`.
+   * @returns {Value} The returned value is an affix of a generic type variable `Value`, optionally sanitized by the `pattern`.
    */
-  public override get [Symbol.toStringTag]() {
-    return Affix.name;
+  public static sanitize<
+    Start extends string = string,
+    End extends string = Start,
+    Value extends string | [Start, End] = string | [Start, End]
+  >(
+    value: Value,
+    pattern: RegExp | string = this.pattern,
+  ): Value {
+    return (typeof value === 'string'
+      ? value.replace(pattern, '')
+      : value.map(v => v.replace(pattern, ''))
+    ) as any;
   }
 
   /**
@@ -34,19 +47,21 @@ export class Affix<
   public static pattern: RegExp | string = /[^a-zA-Z0-9$_]/g;
 
   /**
-   * @description Defines the affix sanitized by specified pattern.
+   * @description Tag name for the `toStringTag`.
    * @public
    * @static
-   * @template {string} [Value=string] The type of affix constrained by the `string` type. Defaults to `string`.
-   * @param {Value} value A value of generic type variable `Value` constrained by the `string` type to be sanitized with the `pattern`.
-   * @param {RegExp | string} [pattern=Affix.pattern] The pattern of `RegExp` to sanitize the `affix`. Defaults to static `Affix.pattern`.
-   * @returns {Value} The returned value is an affix of a generic type variable `Value`, optionally sanitized by the `pattern`.
+   * @type {string}
    */
-  public static sanitize<Value extends string = string>(
-    value: Value,
-    pattern: RegExp | string = this.pattern,
-  ): Value {
-    return value.replace(pattern, '') as Value;
+  public static override tagName: string = Affix.name;
+
+  /**
+   * @description Returns the `string` tag representation of the `Affix` class when used in `Object.prototype.toString.call(instance)`.
+   * @public
+   * @readonly
+   * @type {string}
+   */
+  public override get [Symbol.toStringTag]() {
+    return Affix.tagName;
   }
 
   /**
@@ -77,7 +92,7 @@ export class Affix<
     value: Value,
     { kind, pattern }: { kind?: Kind, pattern?: Pattern } = {},
   ) {
-    super(value, kind);
+    super(Affix.sanitize(value, pattern), kind);
     this.#pattern = pattern ?? Affix.pattern as Pattern;
   }
 
