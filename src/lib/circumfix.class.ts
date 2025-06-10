@@ -17,17 +17,17 @@ export class Circumfix<
   Pattern extends RegExp | string | undefined = RegExp | string | undefined,
 > extends Affix<[Start, End], 'circumfix', Pattern> {
   /**
-   * @description
+   * @description Inserts a circumfix to a given stem with an optional delimiter.
    * @public
    * @static
-   * @template {string} [Start=string] 
-   * @template {string} [Stem=string] 
-   * @template {string} [End=Start] 
-   * @template {string} [Delimiter=''] 
-   * @param {Stem} stem 
-   * @param {(Start | [Start, End])} [circumfix=Circumfix.default as Start] 
-   * @param {Delimiter} [delimiter='' as Delimiter] 
-   * @returns {CircumfixTemplate<Start, Stem, End, Delimiter>} 
+   * @template {string} [Start=string] The type of circumfix start constrained by the `string`. Defaults to `string`.
+   * @template {string} [Stem=string] The type of stem constrained by the `string`. Defaults to `string`.
+   * @template {string} [End=Start] The type of circumfix end constrained by the `string`, defaults to the same type as `Start`.
+   * @template {string} [Delimiter=''] The type of delimiter constrained by the `string`, defaults to an empty string.
+   * @param {Stem} stem The stem to which the circumfix will be inserted.
+   * @param {(Start | [Start, End])} [circumfix=Circumfix.default as Start] The circumfix to be applied.
+   * @param {Delimiter} [delimiter='' as Delimiter] The delimiter to be used.
+   * @returns {CircumfixTemplate<Start, Stem, End, Delimiter>} The resulting circumfixed string.
    */
   public static insert<
     Start extends string = string,
@@ -51,12 +51,12 @@ export class Circumfix<
   public static override tagName: string = 'Circumfix';
 
   /**
-   * @description
+   * @description The default circumfix value, which is an empty string. This is used when no circumfix is provided.
    * @public
    * @static
-   * @type {string}
+   * @type {string | [string, string]}
    */
-  public static default: string = '';
+  public static default: string | [string, string] = '';
 
   /**
    * @description Returns the `string` tag representation of the `Circumfix` class when used in `Object.prototype.toString.call(instance)`.
