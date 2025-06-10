@@ -1,0 +1,1 @@
+export type { SplitAt } from './split-at.type';

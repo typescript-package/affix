@@ -1,7 +1,7 @@
 <a href="https://www.typescriptlang.org/">
   <img
     src="https://avatars.githubusercontent.com/u/189666396?s=150&u=9d55b1eb4ce258974ead76bf07ccf49ef0eb0ea7&v=4"
-    title="@typescript-package/affix"
+    title="@typescript-package - The typescript package enhances the development of typescript-based applications by providing well-structured, reusable, easy-to-use packages."
   />
 </a>
 
@@ -12,7 +12,9 @@
 [![GitHub issues][typescript-package-badge-issues]][typescript-package-issues]
 [![GitHub license][typescript-package-badge-license]][typescript-package-license]
 
-A **lightweight** TypeScript library for the affix - prefix and suffix.
+**version**: v4.0.0
+
+A **lightweight** TypeScript library for different kind of affixes.
 
 <br>
 
@@ -20,7 +22,10 @@ A **lightweight** TypeScript library for the affix - prefix and suffix.
 
 - [Installation](#installation)
 - [Api](#api)
+  - [`AffixCore`](#affixcore)
   - [`Affix`](#affix)
+  - [`Circumfix`](#circumfix)
+  - [`Infix`](#infix)
   - [`Prefix`](#prefix)
   - [`Suffix`](#suffix)
 - [Contributing](#contributing)
@@ -33,6 +38,14 @@ A **lightweight** TypeScript library for the affix - prefix and suffix.
 
 ## Installation
 
+### 1. Install peer dependencies
+
+```bash
+npm install @typedly/affix --save-peer
+```
+
+### 2. Install the package
+
 ```bash
 npm install @typescript-package/affix --save-peer
 ```
@@ -42,24 +55,140 @@ npm install @typescript-package/affix --save-peer
 ```typescript
 import {
   // Abstract.
-  Affix,
+  AffixCore,
   // Class.
+  Affix,
+  Circumfix,
+  Infix,
   Prefix,
-  Suffix
+  Suffix,
 } from '@typescript-package/affix';
+```
+
+### `AffixCore`
+
+A core `abstract` class to manage affixes with the value and kind that can be applied to strings.
+
+```typescript
+import { AffixCore } from '@typescript-package/affix';
+
+class Prefix extends AffixCore<string, 'prefix'> {
+  constructor(value: string) {
+    super(value, 'prefix');
+  }
+}
 ```
 
 ### `Affix`
 
-A class to manage affixes (prefixes or suffixes) that can be applied to strings.
+A concrete class to manage affixes that can be applied to strings with additional sanitization.
+
+```typescript
+import { Affix } from '@typescript-package/affix';
+
+export const prefix = new Affix("testAffixValue",  {
+  kind: 'prefix' as BasicAffixKind,
+  pattern: /[^a-zA-Z0-9$_]/g,
+});
+```
+
+### `Circumfix`
+
+A class to manage circumfixes that can be applied to strings.
+
+```typescript
+import { Circumfix } from '@typescript-package/affix';
+
+const circumfix = new Circumfix(
+  'pre', // Start
+  'post', // End
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+circumfix.insertTo(
+  'light' // Stem
+); // 'prelightpost'
+```
+
+### `Infix`
+
+A class to manage infixes that can be applied to strings.
+
+```typescript
+import { Infix } from '@typescript-package/affix';
+
+const infix = new Infix('en');
+
+infix.insertTo(
+  'light', // stem
+  5 // position
+); // 'lighten'
+infix.insertTo(
+  'light', // stem
+  0 // position
+); // 'enlight'
+infix.insertTo(
+  'light', // stem
+  1, // position
+  '-' // delimiter
+); // 'l-en-ight'
+```
 
 ### `Prefix`
 
 A class to manage prefixes that can be applied to strings.
 
+```typescript
+import { Prefix } from '@typescript-package/affix';
+
+const prefix = new Prefix(
+  'pre', // Value
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+prefix.prependTo(
+  'stem', // stem
+  '-' // delimiter
+); // 'pre-stem'
+
+console.debug(`default => `, Prefix.default); // ''
+console.debug(`pattern => `, Prefix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`tagName => `, Prefix.tagName); // 'Prefix'
+
+console.debug(`kind => `, prefix.kind); // 'prefix'
+console.debug(`pattern => `, prefix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`prefix => `, prefix.prefix); // 'pre'
+console.debug(`toStringTag => `, prefix[Symbol.toStringTag]); // 'Prefix'
+console.debug(`value => `, prefix.value); // 'pre'
+
+console.debug(`prefix.get()`, prefix.get()); // 'pre'
+console.debug(`prefix.set({value: 'newPrefix'}) => `, prefix.set({value: 'newPrefix' as any}).value); // 'newPrefix'
+
+console.debug(`prefix.setKind('newKind') => `, prefix.setKind('newKind' as any).kind); // 'newKind'
+console.debug(`prefix.setPattern(/newPattern/g) => `, prefix.setPattern(/newPattern/g).pattern); // /newPattern/g
+console.debug(`prefix.setValue('newValue') => `, prefix.setValue('newValue' as any).value); // 'newValue'
+
+```
+
 ### `Suffix`
 
 A class to manage suffixes that can be applied to strings.
+
+```typescript
+import { Suffix } from '@typescript-package/affix';
+
+export const suffix = new Suffix(
+  'post', // Value
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+Suffix.append(
+  'stem',
+  'post',
+  '-'
+); // 
+
+```
 
 ## Contributing
 
@@ -73,6 +202,17 @@ Support via:
 
 - [Stripe](https://donate.stripe.com/dR614hfDZcJE3wAcMM)
 - [Revolut](https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29)
+- [GitHub](https://github.com/sponsors/angular-package/sponsorships?sponsor=sciborrudnicki&tier_id=83618)
+- [DonorBox](https://donorbox.org/become-a-sponsor-to-the-angular-package?default_interval=o)
+- [Patreon](https://www.patreon.com/checkout/angularpackage?rid=0&fan_landing=true&view_as=public)
+
+or via Trust Wallet
+
+- [XLM](https://link.trustwallet.com/send?coin=148&address=GAFFFB7H3LG42O6JA63FJDRK4PP4JCNEOPHLGLLFH625X2KFYQ4UYVM4)
+- [USDT (BEP20)](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94&token_id=0x55d398326f99059fF775485246999027B3197955)
+- [ETH](https://link.trustwallet.com/send?coin=60&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
+- [BTC](https://link.trustwallet.com/send?coin=0&address=bc1qnf709336tfl57ta5mfkf4t9fndhx7agxvv9svn)
+- [BNB](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
 
 Thanks for your support!
 
