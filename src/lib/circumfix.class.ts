@@ -121,7 +121,7 @@ export class Circumfix<
   public insertTo<
     Stem extends string = string,
     Delimiter extends string = '',
-  >(stem: Stem, delimiter: Delimiter): CircumfixTemplate<Start, Stem, End, Delimiter> {
+  >(stem: Stem, delimiter: Delimiter = '' as Delimiter): CircumfixTemplate<Start, Stem, End, Delimiter> {
     return Circumfix.insert<Start, Stem, End, Delimiter>(
       stem,
       [this.start, this.end],
