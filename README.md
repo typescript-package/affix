@@ -12,7 +12,7 @@
 [![GitHub issues][typescript-package-badge-issues]][typescript-package-issues]
 [![GitHub license][typescript-package-badge-license]][typescript-package-license]
 
-**version**: v3.0.0
+**version**: v4.0.0
 
 A **lightweight** TypeScript library for different kind of affixes.
 
@@ -99,6 +99,15 @@ A class to manage circumfixes that can be applied to strings.
 ```typescript
 import { Circumfix } from '@typescript-package/affix';
 
+const circumfix = new Circumfix(
+  'pre', // Start
+  'post', // End
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+circumfix.insertTo(
+  'light' // Stem
+); // 'prelightpost'
 ```
 
 ### `Infix`
@@ -108,6 +117,21 @@ A class to manage infixes that can be applied to strings.
 ```typescript
 import { Infix } from '@typescript-package/affix';
 
+const infix = new Infix('en');
+
+infix.insertTo(
+  'light', // stem
+  5 // position
+); // 'lighten'
+infix.insertTo(
+  'light', // stem
+  0 // position
+); // 'enlight'
+infix.insertTo(
+  'light', // stem
+  1, // position
+  '-' // delimiter
+); // 'l-en-ight'
 ```
 
 ### `Prefix`
@@ -117,7 +141,33 @@ A class to manage prefixes that can be applied to strings.
 ```typescript
 import { Prefix } from '@typescript-package/affix';
 
-export const prefix = new Prefix();
+const prefix = new Prefix(
+  'pre', // Value
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+prefix.prependTo(
+  'stem', // stem
+  '-' // delimiter
+); // 'pre-stem'
+
+console.debug(`default => `, Prefix.default); // ''
+console.debug(`pattern => `, Prefix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`tagName => `, Prefix.tagName); // 'Prefix'
+
+console.debug(`kind => `, prefix.kind); // 'prefix'
+console.debug(`pattern => `, prefix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`prefix => `, prefix.prefix); // 'pre'
+console.debug(`toStringTag => `, prefix[Symbol.toStringTag]); // 'Prefix'
+console.debug(`value => `, prefix.value); // 'pre'
+
+console.debug(`prefix.get()`, prefix.get()); // 'pre'
+console.debug(`prefix.set({value: 'newPrefix'}) => `, prefix.set({value: 'newPrefix' as any}).value); // 'newPrefix'
+
+console.debug(`prefix.setKind('newKind') => `, prefix.setKind('newKind' as any).kind); // 'newKind'
+console.debug(`prefix.setPattern(/newPattern/g) => `, prefix.setPattern(/newPattern/g).pattern); // /newPattern/g
+console.debug(`prefix.setValue('newValue') => `, prefix.setValue('newValue' as any).value); // 'newValue'
+
 ```
 
 ### `Suffix`
@@ -126,6 +176,18 @@ A class to manage suffixes that can be applied to strings.
 
 ```typescript
 import { Suffix } from '@typescript-package/affix';
+
+export const suffix = new Suffix(
+  'post', // Value
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+Suffix.append(
+  'stem',
+  'post',
+  '-'
+); // 
+
 ```
 
 ## Contributing
