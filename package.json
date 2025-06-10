@@ -1,6 +1,6 @@
 {
   "name": "@typescript-package/affix",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "author": "wwwdev.io <dev@wwwdev.io>",
   "description": "A lightweight TypeScript library for different kind of affixes.",
   "license": "MIT",
