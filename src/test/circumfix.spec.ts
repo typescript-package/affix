@@ -15,8 +15,19 @@ describe('Circumfix', () => {
   });
 
   it('should apply circumfix to a string', () => {
-    const result = circumfix.insertTo('testString', '-');
-    expect(result).toBe('pre-testString-post');
+    expect(circumfix.insertTo('testString', '-')).toBe('pre-testString-post');
+  });
+
+  it(`static insert() with default`, () =>{
+    Circumfix.default = ['start', 'end'];
+    expect(Circumfix.insert('light')).toBe('startlightend'); // startlightend
+    expect(Circumfix.insert('light', undefined, '-')).toBe('start-light-end'); // start-light-end
+  });
+
+  it(`static insert()`, () =>{
+    expect(Circumfix.insert('light', 'en')).toBe('enlighten'); // enlighten
+    expect(Circumfix.insert('light', 'en', '-')).toBe('en-light-en'); // en-light-en
+    expect(Circumfix.insert('stem', ['start', 'end'], '-')).toBe('start-stem-end'); // start-stem-end
   });
 
   it('should sanitize the start and end using the pattern', () => {

@@ -10,13 +10,11 @@ describe(Prefix.name, () => {
   it('set prefix to $$', () => expect(prefix.set({value: 'pre'}).value).toEqual('pre'));
 
   it('should apply prefix to a string', () => {
-    const result = prefix.prependTo('testString', '-');
-    expect(result).toBe('pre-testString');
+    expect(prefix.prependTo('testString', '-')).toBe('pre-testString');
   });
 
   it('should sanitize the prefix using the pattern', () => {
-    const sanitizedPrefix = new Prefix('pre@#$', /[^a-zA-Z0-9$_]/g);
-    expect(sanitizedPrefix.value).toBe('pre$');
+    expect(new Prefix('pre@#$', /[^a-zA-Z0-9$_]/g).value).toBe('pre$');
   });
 
   it('should have a prependTo method', () => {
@@ -25,16 +23,33 @@ describe(Prefix.name, () => {
   });
 
   it('should return the correct value when prependTo is called', () => {
-    const result = prefix.prependTo('testString', '-');
-    expect(result).toBe('pre-testString');
+    expect(prefix.prependTo('testString', '-')).toBe('pre-testString');
   });
 
   it('should return the correct Symbol.toStringTag', () => {
     expect(Object.prototype.toString.call(prefix).match(/\[object (\w+)]/)?.[1]).toBe('Prefix');
   });
 
+  // Static.
   it('should prepend a prefix to a string', () => {
-    const result = Prefix.prepend('testString', 'pre', '-');
-    expect(result).toBe('pre-testString');
+    expect(Prefix.prepend('testString', 'pre', '-')).toBe('pre-testString');
+  });
+
+  it('should sanitize a prefix using the static sanitize method', () => {
+    expect(Prefix.sanitize('pre@#$', /[^a-zA-Z0-9$_]/g)).toBe('pre$');
+  });
+
+  it('should have a static default property', () => {
+    expect(typeof Prefix.default).toBe('string');
+  });
+
+  it('should have a static pattern property', () => {
+    expect(Prefix.pattern).toBeDefined();
+  });
+
+  it('should have a static tagName property', () => {
+    expect(Prefix.tagName).toBe('Prefix');
+    Prefix.tagName = 'NewPrefix';
+    expect(Prefix.tagName).toBe('NewPrefix');
   });
 });

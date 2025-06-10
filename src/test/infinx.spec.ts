@@ -12,13 +12,11 @@ describe(Infix.name, () => {
   it('set infix to new value', () => expect(infix.set({value: 'newInfixValue'}).value).toEqual('newInfixValue'));
 
   it('should apply infix to a string', () => {
-    const result = infix.insertTo('testString', 4, '-');
-    expect(result).toBe('test-infixValue-String');
+    expect(infix.insertTo('testString', 4, '-')).toBe('test-infixValue-String');
   });
 
   it('should sanitize the infix using the pattern', () => {
-    const sanitizedInfix = new Infix('infix@#$', /[^a-zA-Z0-9$_]/g);
-    expect(sanitizedInfix.value).toBe('infix$');
+    expect(new Infix('infix@#$', /[^a-zA-Z0-9$_]/g).value).toBe('infix$');
   });
 
   it('should return the correct Symbol.toStringTag', () => {
@@ -26,7 +24,6 @@ describe(Infix.name, () => {
   });
 
   it(`should insert infix into a string at the specified position`, () => {
-    const result = Infix.insert('testString', 'infixValue', 4, '-');
-    expect(result).toBe('test-infixValue-String');
+    expect(Infix.insert('stem', 'infix', 2, '-')).toBe('st-infix-em');
   });
 });

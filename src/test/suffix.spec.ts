@@ -10,13 +10,11 @@ describe(Suffix.name, () => {
   it('set suffix to $$', () => expect(suffix.set({value: 'post'}).value).toEqual('post'));
 
   it('should apply suffix to a string', () => {
-    const result = suffix.appendTo('testString', '-');
-    expect(result).toBe('testString-post');
+    expect(suffix.appendTo('testString', '-')).toBe('testString-post');
   });
 
   it('should sanitize the suffix using the pattern', () => {
-    const sanitizedSuffix = new Suffix('post@#$', /[^a-zA-Z0-9$_]/g);
-    expect(sanitizedSuffix.value).toBe('post$');
+    expect(new Suffix('post@#$', /[^a-zA-Z0-9$_]/g).value).toBe('post$');
   });
 
   it('should have an appendTo method', () => {
@@ -25,8 +23,7 @@ describe(Suffix.name, () => {
   });
 
   it('should return the correct value when appendTo is called', () => {
-    const result = suffix.appendTo('testString', '-');
-    expect(result).toBe('testString-post');
+    expect(suffix.appendTo('testString', '-')).toBe('testString-post');
   });
 
   it('should return the correct Symbol.toStringTag', () => {
@@ -34,7 +31,6 @@ describe(Suffix.name, () => {
   });
 
   it('should append a suffix to a string', () => {
-    const result = Suffix.append('testString', 'post', '-');
-    expect(result).toBe('testString-post');
+    expect(Suffix.append('testString', 'post', '-')).toBe('testString-post');
   });
 });

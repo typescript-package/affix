@@ -25,5 +25,4 @@ describe("AffixCore", () => {
     expect(affix.value).toBe("test");
     expect(affix.kind).toBe("prefix");
   });
-
 });
