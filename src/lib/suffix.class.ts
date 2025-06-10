@@ -66,7 +66,7 @@ export class Suffix<
   }
 
   /**
-   * @description
+   * @description The suffix value of generic type variable `Value` constrained by the `string` type.
    * @public
    * @readonly
    * @type {Value}

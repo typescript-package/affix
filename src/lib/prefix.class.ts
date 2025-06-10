@@ -66,7 +66,7 @@ export class Prefix<
   }
 
   /**
-   * @description
+   * @description The prefix value of the generic type variable `Value` constrained by the `string` type.
    * @public
    * @readonly
    * @type {Value}
