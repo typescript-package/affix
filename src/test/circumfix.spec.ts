@@ -36,3 +36,33 @@ describe('Circumfix', () => {
     expect(sanitizedCircumfix.end).toBe('post$');
   });
 });
+
+export const circumfix = new Circumfix(
+  'pre', // Start
+  'post', // End
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+circumfix.insertTo(
+  'light', // Stem
+); // 'prelightpost'
+
+console.groupEnd();
+
+console.debug(`pattern => `, circumfix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`start => `, circumfix.start); // 'pre'
+console.debug(`end => `, circumfix.end); // 'post'
+console.debug(`toStringTag => `, circumfix[Symbol.toStringTag]); // 'Circumfix'
+console.debug(`value => `, circumfix.value); // 'pre-post'
+console.groupEnd();
+console.groupEnd();
+console.group('Methods');
+console.debug(`Circumfix.insert('stem', ['start', 'end'], '-') => `, Circumfix.insert('stem', ['start', 'end'], '-')); // 'start-stem-end'
+console.debug(`Circumfix.sanitize('pre@#$', /[^a-zA-Z0-9$_]/g) => `, Circumfix.sanitize('pre@#$', /[^a-zA-Z0-9$_]/g)); // 'pre$'
+console.debug(`Circumfix.insert('light', 'en') => `, Circumfix.insert('light', 'en')); // 'enlighten'
+console.debug(`Circumfix.insert('light', 'en', '-') => `, Circumfix.insert('light', 'en', '-')); // 'en-light-en'
+console.debug(`circumfix.insertTo('testString', '-') => `, circumfix.insertTo('testString', '-')); // 'pre-testString-post'
+console.debug(`circumfix.toString() => `, circumfix.toString()); // '[object Circumfix]'
+console.groupEnd();
+console.groupEnd();
+

@@ -53,3 +53,39 @@ describe(Prefix.name, () => {
     expect(Prefix.tagName).toBe('NewPrefix');
   });
 });
+
+console.group('Prefix');
+
+export const prefix = new Prefix(
+  'pre', // Value
+  /[^a-zA-Z0-9$_]/g // Pattern
+);
+
+console.group('Properties');
+
+console.debug(`default => `, Prefix.default); // 'prefix'
+console.debug(`pattern => `, Prefix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`tagName => `, Prefix.tagName); // 'Prefix'
+
+console.debug(`kind => `, prefix.kind); // 'prefix'
+console.debug(`pattern => `, prefix.pattern); // RegExp /[^a-zA-Z0-9$_]/g
+console.debug(`prefix => `, prefix.prefix); // 'pre'
+console.debug(`toStringTag => `, prefix[Symbol.toStringTag]); // 'Prefix'
+console.debug(`value => `, prefix.value); // 'pre'
+console.groupEnd();
+
+console.group('Methods');
+console.debug(`Prefix.sanitize('pre@#$', /[^a-zA-Z0-9$_]/g) => `, Prefix.sanitize('pre@#$', /[^a-zA-Z0-9$_]/g)); // 'pre$'
+console.debug(`Prefix.prepend('stem', 'pre', '-') => `, Prefix.prepend('stem', 'pre', '-')); // 'pre-stem'
+
+console.debug(`prependTo('stem', '-') => `, prefix.prependTo('stem', '-')); // 'pre-stem'
+console.debug(`toString() => `, prefix.toString()); // '[object Prefix]'
+
+console.debug(`prefix.get()`, prefix.get()); // 'pre'
+console.debug(`prefix.set({value: 'newPrefix'}) => `, prefix.set({value: 'newPrefix' as any}).value); // 'newPrefix'
+
+console.debug(`prefix.setKind('newKind') => `, prefix.setKind('newKind' as any).kind); // 'newKind'
+console.debug(`prefix.setPattern(/newPattern/g) => `, prefix.setPattern(/newPattern/g).pattern); // /newPattern/g
+console.debug(`prefix.setValue('newValue') => `, prefix.setValue('newValue' as any).value); // 'newValue'
+
+console.groupEnd();

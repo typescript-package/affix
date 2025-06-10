@@ -27,3 +27,23 @@ describe(Infix.name, () => {
     expect(Infix.insert('stem', 'infix', 2, '-')).toBe('st-infix-em');
   });
 });
+
+export const infix = new Infix('en');
+
+console.group(`Infix`);
+
+infix.insertTo(
+  'light', // stem
+  5 // position
+); // 'lighten'
+infix.insertTo(
+  'light', // stem
+  0 // position
+); // 'enlight'
+infix.insertTo(
+  'light', // stem
+  1, // position
+  '-' // delimiter
+); // 'l-en-ight'
+
+console.groupEnd();
